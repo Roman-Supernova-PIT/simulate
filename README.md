@@ -38,9 +38,15 @@ imagelib.mkfigure('myfile.asdf',plotname='myfile.png')
 You can also create the same image with sources identified
 ```
 import imagelib
+# with all the stars and galaxies identified
 imagelib.plot_image('r0003201001001001004_0001_wfi01_f106_example_cal.asdf',
                      catname='parametric_catalog_example.csv')
+# with just the stars identified
+imagelib.plot_image('r0003201001001001004_0001_wfi01_f106_example_cal.asdf',
+                     catname='parametric_stars_example.ecsv')
 ```
+<img width="800" height="800" alt="r0003201001001001004_0001_wfi01_f106_example_cal_cat" src="https://github.com/user-attachments/assets/e1c37f83-9c45-4ab0-b75d-ce16fe389ae6" />
+
 
 > [!NOTE]
 > F129 is giving very low flux in the objects
