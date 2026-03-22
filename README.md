@@ -35,7 +35,17 @@ import imagelib
 imagelib.mkfigure('myfile.asdf',plotname='myfile.png')
 ```
 
+You can also create the same image with sources identified
+```
+import imagelib
+imagelib.plot_image('r0003201001001001004_0001_wfi01_f106_example_cal.asdf',
+                     catname='parametric_catalog_example.csv')
+```
+
 > [!NOTE]
 > F129 is giving very low flux in the objects
 >
 > I haven't gotten L1 images to run through romancal yet at the versions installed in the requirements file
+>
+> If you think the output is looking weird, try a different MA Table or Filter
+>

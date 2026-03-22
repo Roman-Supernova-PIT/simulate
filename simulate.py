@@ -325,8 +325,10 @@ def create_galaxy_catalog(ra, dec, radius, n_gal=10_000,index=0.4,
     
     # create a list of catalog objects
     #catalog = riscatalog.table_to_catalog(galaxy_cat, bandpasses=band)
-
-    return galaxy_cat 
+    filename=f'galaxy_catalog_{ra:.2f}_{dec:.2f}_{radius:.2f}.ecsv'
+    galaxy_cat.write(filename, overwrite=overwrite)
+    logging.info(f"Wrote galaxy catalog to: {filename}")
+    return (galaxy_cat, filename) 
 
 
 
@@ -340,8 +342,10 @@ def create_star_catalog(ra, dec, radius, n_star=30_000,
                                   truncation_radius=None, bandpasses=band,
                                   rng=rng,seed=seed)
     #catalog = riscatalog.table_to_catalog(star_cat, bandpasses=band)
-
-    return star_cat  
+    filename=f'star_catalog_{ra:.2f}_{dec:.2f}_{radius:.2f}.ecsv'
+    star_cat.write(filename, overwrite=overwrite)
+    logging.info(f"Wrote star catalog to: {filename}")
+    return (star_cat,filename)  
 
 
 
@@ -846,11 +850,11 @@ if __name__ == "__main__":
     gaia_catalog = Table.read(gaia_name)
 
     # make a catalog with all the filters
-    star_catalog = create_star_catalog(ra, dec, radius,seed=config['SEED'],rng=None,
+    star_catalog,star_file = create_star_catalog(ra, dec, radius,seed=config['SEED'],rng=None,
                                        band=list(config['BAND_LIST_SOC'].values()))
 
     # make a catalog with all the filters
-    gal_catalog = create_galaxy_catalog(ra, dec, radius,
+    gal_catalog, gal_file = create_galaxy_catalog(ra, dec, radius,
                                         hlight_radius=0.3,seed=config['SEED'],rng=None,
                                         band=list(config['BAND_LIST_SOC'].values()))
 
