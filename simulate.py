@@ -326,7 +326,7 @@ def create_galaxy_catalog(ra, dec, radius, n_gal=10_000,index=0.4,
     # create a list of catalog objects
     #catalog = riscatalog.table_to_catalog(galaxy_cat, bandpasses=band)
     filename=f'galaxy_catalog_{ra:.2f}_{dec:.2f}_{radius:.2f}.ecsv'
-    galaxy_cat.write(filename, overwrite=overwrite)
+    galaxy_cat.write(filename, overwrite=True)
     logging.info(f"Wrote galaxy catalog to: {filename}")
     return (galaxy_cat, filename) 
 
@@ -343,7 +343,7 @@ def create_star_catalog(ra, dec, radius, n_star=30_000,
                                   rng=rng,seed=seed)
     #catalog = riscatalog.table_to_catalog(star_cat, bandpasses=band)
     filename=f'star_catalog_{ra:.2f}_{dec:.2f}_{radius:.2f}.ecsv'
-    star_cat.write(filename, overwrite=overwrite)
+    star_cat.write(filename, overwrite=True)
     logging.info(f"Wrote star catalog to: {filename}")
     return (star_cat,filename)  
 
@@ -412,7 +412,9 @@ def print_matable(crds_server_url, start_time="2026-01-01T00:00:00.000",
                 crds_context="", crds_path="./", resultants=9,
                 crds_url="https://roman-crds.stsci.edu/"):
     """print the current MA Table reference file from CRDS
-
+    
+    you'll probably need to configure this locally if you're
+    calling this like a script
     """
     logging.info("Getting crds server and checking MA Table File")
     os.environ["CRDS_SERVER_URL"]=crds_server_url
